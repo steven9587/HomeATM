@@ -22,10 +22,10 @@ public class AgeActivity extends BaseActivity {
         age = Integer.parseInt(edAge.getText().toString());
 //        getSharedPreferences("user", MODE_PRIVATE)
 //                .edit()
-//                .putInt("USERAGE", age)
+//                .putInt("AGE", age)
 //                .apply();
         user.setAge(age);
-        Intent gender = new Intent(this,GenderActivity.class);
+        Intent gender = new Intent(this, GenderActivity.class);
         startActivity(gender);
     }
 

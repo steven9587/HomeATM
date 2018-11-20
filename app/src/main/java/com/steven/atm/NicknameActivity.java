@@ -20,9 +20,9 @@ public class NicknameActivity extends BaseActivity {
     public void next(View view) {
         edNickname = findViewById(R.id.ed_nickname);
         nickname = edNickname.getText().toString();
-//        getSharedPreferences("user", MODE_PRIVATE)
+//        getSharedPreferences("user",MODE_PRIVATE)
 //                .edit()
-//                .putString("USERNICKNAME", nickname)
+//                .putString("NICKNAME", nickname)
 //                .apply();
         user.setNickname(nickname);
         Intent age = new Intent(this,AgeActivity.class);

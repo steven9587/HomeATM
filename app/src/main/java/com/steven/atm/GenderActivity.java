@@ -8,9 +8,6 @@ import android.widget.EditText;
 
 public class GenderActivity extends BaseActivity {
 
-    private EditText edGender;
-    private int gender;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,11 +15,11 @@ public class GenderActivity extends BaseActivity {
     }
 
     public void next(View view) {
-        edGender = findViewById(R.id.ed_gender);
-        gender = Integer.parseInt(edGender.getText().toString());
+        EditText edGender = findViewById(R.id.ed_gender);
+        int gender = Integer.parseInt(edGender.getText().toString());
 //        getSharedPreferences("user", MODE_PRIVATE)
 //                .edit()
-//                .putInt("USERGENDER", gender)
+//                .putInt("GENDER", gender)
 //                .apply();
         user.setGender(gender);
         Intent main = new Intent(this, MainActivity.class);

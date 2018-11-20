@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class User {
-    private Context content;
+    private Context context;
     String id;
     String nickname;
     int age;
@@ -12,63 +12,60 @@ public class User {
     SharedPreferences setting;
     boolean valid;
 
-    public User(Context context) {
-        this.content = context;
-        setting = context.getSharedPreferences("user", Context.MODE_PRIVATE);
+    public User(Context context){
+        this.context = context;
+        setting = context.getSharedPreferences("user",Context.MODE_PRIVATE);
     }
-
     public String getId() {
+        id = setting.getString("ID",null);
         return id;
     }
 
     public void setId(String id) {
+        setting.edit()
+                .putString("ID",id)
+                .apply();
         this.id = id;
     }
 
     public String getNickname() {
-        if (nickname == null) {
-            nickname = setting.getString("USERNICKNAME", null);
-        }
+        nickname = setting.getString("NICKNAME",nickname);
         return nickname;
     }
 
     public void setNickname(String nickname) {
         setting.edit()
-                .putString("USERNICKNAME", nickname)
+                .putString("NICKNAME",nickname)
                 .apply();
         this.nickname = nickname;
     }
 
     public int getAge() {
-        if (age == 0) {
-            age = setting.getInt("USERAGE", 0);
-        }
+        age = setting.getInt("AGE",age);
         return age;
     }
 
     public void setAge(int age) {
         setting.edit()
-                .putInt("USERAGE", age)
+                .putInt("AGE",age)
                 .apply();
         this.age = age;
     }
 
     public int getGender() {
-        if (gender == 0) {
-            gender = setting.getInt("USERGENDER", 0);
-        }
+        gender = setting.getInt("GENDER",gender);
         return gender;
     }
 
     public void setGender(int gender) {
         setting.edit()
-                .putInt("USERGENDER", gender)
+                .putInt("GENDER",gender)
                 .apply();
         this.gender = gender;
     }
 
     public boolean isValid() {
-        valid = getNickname() != null && getAge() != 0 && getGender() != 0;
+        valid = getNickname() != null && getAge() !=0 && getGender() !=0;
         return valid;
     }
 }

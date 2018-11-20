@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-public class Login extends AppCompatActivity {
+public class Login extends BaseActivity {
 
     private EditText edID;
     private EditText edPassword;
@@ -18,20 +18,21 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         edID = findViewById(R.id.ed_id);
         edPassword = findViewById(R.id.ed_password);
-        String saveID = getSharedPreferences("ATM",MODE_PRIVATE)
-                .getString("USERID",id);
-        edID.setText(saveID);
+//        String saveID = getSharedPreferences("atm",MODE_PRIVATE)
+//                .getString("ID",id);
+        edID.setText(user.getId());
     }
 
     public void Login(View view) {
         id = edID.getText().toString();
         password = edPassword.getText().toString();
         if ("steven".equals(id) && "1234".equals(password)) {
-            getSharedPreferences("ATM",MODE_PRIVATE)
-                    .edit()
-                    .putString("USERID",id)
-                    .apply();
             setResult(RESULT_OK);
+//            getSharedPreferences("user",MODE_PRIVATE)
+//                    .edit()
+//                    .putString("ID",id)
+//                    .apply();
+            user.setId(id);
             finish();
         } else {
             setResult(RESULT_CANCELED);
