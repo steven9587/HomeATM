@@ -15,17 +15,13 @@ public class NicknameActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nickname);
+        edNickname = findViewById(R.id.ed_nickname);
     }
 
     public void next(View view) {
-        edNickname = findViewById(R.id.ed_nickname);
         nickname = edNickname.getText().toString();
-//        getSharedPreferences("user",MODE_PRIVATE)
-//                .edit()
-//                .putString("NICKNAME", nickname)
-//                .apply();
         user.setNickname(nickname);
-        Intent age = new Intent(this,AgeActivity.class);
+        Intent age = new Intent(this, AgeActivity.class);
         startActivity(age);
     }
 }

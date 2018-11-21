@@ -9,20 +9,20 @@ import android.widget.TextView;
 public class MainActivity extends BaseActivity {
     private static final int RC_LOGIN = 100;
     boolean login = false;
-    private TextView finalNIckname;
-    private TextView finalAge;
-    private TextView finalGender;
+    private TextView showNickname;
+    private TextView showAge;
+    private TextView showGender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        finalNIckname = findViewById(R.id.finalNickname);
-        finalAge = findViewById(R.id.finalAge);
-        finalGender = findViewById(R.id.finalGender);
-        finalNIckname.setText(user.getNickname());
-        finalAge.setText(String.valueOf(user.getAge()));
-        finalGender.setText(String .valueOf(user.getGender()));
+        showNickname = findViewById(R.id.finalNickname);
+        showAge = findViewById(R.id.finalAge);
+        showGender = findViewById(R.id.finalGender);
+        showNickname.setText(user.getNickname());
+        showAge.setText(String.valueOf(user.getAge()));
+        showGender.setText(String.valueOf(user.getGender()));
         if (!login) {
             Intent login = new Intent(this, Login.class);
             startActivityForResult(login, RC_LOGIN);
@@ -36,23 +36,9 @@ public class MainActivity extends BaseActivity {
             if (resultCode != RESULT_OK) {
                 finish();
             } else {
-//                String saveNickname = getSharedPreferences("user", MODE_PRIVATE)
-//                        .getString("NICKNAME", null);
-//                int saveAge = getSharedPreferences("user", MODE_PRIVATE)
-//                        .getInt("AGE", 0);
-//                int saveGender = getSharedPreferences("user", MODE_PRIVATE)
-//                        .getInt("GENDER", 0);
-//                if (saveNickname == null || saveAge == 0 || saveGender == 0) {
                 if (!user.isValid()) {
                     Intent nickname = new Intent(this, NicknameActivity.class);
                     startActivity(nickname);
-                }else{
-                    finalNIckname = findViewById(R.id.finalNickname);
-                    finalAge = findViewById(R.id.finalAge);
-                    finalGender = findViewById(R.id.finalGender);
-                    finalNIckname.setText(user.getNickname());
-                    finalAge.setText(String.valueOf(user.getAge()));
-                    finalGender.setText(String .valueOf(user.getGender()));
                 }
             }
         }
