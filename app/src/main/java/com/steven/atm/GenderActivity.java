@@ -8,20 +8,18 @@ import android.widget.EditText;
 
 public class GenderActivity extends BaseActivity {
 
-    private EditText edGender;
-    private int gender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gender);
-        edGender = findViewById(R.id.ed_gender);
     }
 
     public void next(View view) {
-        gender = Integer.parseInt(edGender.getText().toString());
+        EditText edGender = findViewById(R.id.ed_gender);
+        int gender = Integer.parseInt(edGender.getText().toString());
         user.setGender(gender);
-        Intent main = new Intent(this,MainActivity.class);
+        Intent main = new Intent(this, MainActivity.class);
         main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(main);
     }

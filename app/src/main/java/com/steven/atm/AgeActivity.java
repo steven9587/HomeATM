@@ -8,18 +8,15 @@ import android.widget.EditText;
 
 public class AgeActivity extends BaseActivity {
 
-    private EditText edAge;
-    private int age;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_age);
-        edAge = findViewById(R.id.ed_age);
     }
 
     public void next(View view) {
-        age = Integer.parseInt(edAge.getText().toString());
+        EditText edAge = findViewById(R.id.ed_age);
+        int age = Integer.parseInt(edAge.getText().toString());
         user.setAge(age);
         Intent gender = new Intent(this, GenderActivity.class);
         startActivity(gender);

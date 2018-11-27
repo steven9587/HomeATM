@@ -11,6 +11,7 @@ public class Login extends BaseActivity {
     private EditText edPassword;
     private String id;
     private String password;
+    private String saveId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,17 +19,24 @@ public class Login extends BaseActivity {
         setContentView(R.layout.activity_login);
         edId = findViewById(R.id.ed_id);
         edPassword = findViewById(R.id.ed_password);
+//        saveId = getSharedPreferences("user",MODE_PRIVATE)
+//                .getString("ID",null);
+//        edId.setText(saveId);
         edId.setText(user.getId());
     }
 
-    public void Login(View view){
+    public void Login(View view) {
         id = edId.getText().toString();
         password = edPassword.getText().toString();
         if ("steven".equals(id) && "1234".equals(password)) {
-            user.setId(id);
             setResult(RESULT_OK);
+//            getSharedPreferences("user", MODE_PRIVATE)
+//                    .edit()
+//                    .putString("ID", id)
+//                    .apply();
+            user.setId(id);
             finish();
-        }else{
+        } else {
             setResult(RESULT_CANCELED);
             finish();
         }
