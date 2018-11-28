@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -33,17 +36,40 @@ public class MainActivity extends BaseActivity {
             Intent login = new Intent(this, Login.class);
             startActivityForResult(login, RC_LOGIN);
         }
-        //ArrayAdapterOne
-        //arrayAdapterOne();
-        //ArrayAdapterTwo
-        arrayAdapterTwo();
-        //SpinnerOne
-        //spinnerOne();
-        //SpinnerTwo
-        spinnerTwo();
+        //ArrayAdapter外部Arraylist
+        //arrayAdapterOut();
+        //ArrayAdapter內部Arraylist
+        //arrayAdapterIn();
+        //Spinner外部Arraylist
+        //spinnerOut();
+        //Spinner內部Arraylist
+        //spinnerIn();
+        //GridView
+        GridView gridView = findViewById(R.id.grid);
+        ArrayAdapter<CharSequence> function =
+                ArrayAdapter.createFromResource(this, R.array.functionList, android.R.layout.simple_list_item_1);
+        gridView.setAdapter(function);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    switch (position){
+                        case 0:
+                            break;
+                        case 1:
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            break;
+                        case 4:
+                            finish();
+                            break;
+                    }
+            }
+        });
     }
-
-    private void spinnerTwo() {
+    
+    private void spinnerIn() {
         Spinner notify = findViewById(R.id.spinner);
         List<String> notifyList = Arrays.asList("靜音", "震動", "有聲");
         final ArrayAdapter<String> arrayAdapter =
@@ -62,7 +88,7 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    private void spinnerOne() {
+    private void spinnerOut() {
         Spinner notify = findViewById(R.id.spinner);
         final ArrayAdapter<CharSequence> arrayAdapter =
                 ArrayAdapter.createFromResource(this, R.array.notifyList, android.R.layout.simple_spinner_dropdown_item);
@@ -80,14 +106,14 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    private void arrayAdapterTwo() {
+    private void arrayAdapterIn() {
         ListView functions = findViewById(R.id.listView);
         List<String> functionList = Arrays.asList("餘額查詢", "交易明細", "最新消息", "投資理財", "離開");
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, functionList);
         functions.setAdapter(arrayAdapter);
     }
 
-    private void arrayAdapterOne() {
+    private void arrayAdapterOut() {
         ListView functions = findViewById(R.id.listView);
         ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, R.array.functionList, android.R.layout.simple_list_item_1);
         functions.setAdapter(arrayAdapter);
