@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -32,18 +33,26 @@ public class MainActivity extends BaseActivity {
             Intent login = new Intent(this, Login.class);
             startActivityForResult(login, RC_LOGIN);
         }
-        //ArrayAdapter
-        ListView listView = findViewById(R.id.listView);
-        ArrayAdapter<CharSequence> functions = ArrayAdapter.createFromResource(this,R.array.functions,android.R.layout.simple_list_item_1);
-        listView.setAdapter(functions);
-        //Spinner
-        final Spinner spinner = findViewById(R.id.spinner);
-        final ArrayAdapter<CharSequence> notify = ArrayAdapter.createFromResource(this,R.array.notify,android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(notify);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        //ArrayAdapterOne
+        //arrayAdapterOne();
+        //ArrayAdapterTwo
+        arrayAdapterTwo();
+        //SpinnerOne
+        //spinnerOne();
+        //SpinnerTwo
+        spinnerTwo();
+    }
+
+    private void spinnerTwo() {
+        Spinner notify = findViewById(R.id.spinner);
+        List<String> notifyList = Arrays.asList("靜音", "震動", "有聲");
+        final ArrayAdapter<String> arrayAdapter =
+                new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, notifyList);
+        notify.setAdapter(arrayAdapter);
+        notify.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this,notify.getItem(position),Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, arrayAdapter.getItem(position), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -52,6 +61,38 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+
+    private void spinnerOne() {
+        Spinner notify = findViewById(R.id.spinner);
+        final ArrayAdapter<CharSequence> arrayAdapter =
+                ArrayAdapter.createFromResource(this, R.array.notifyList, android.R.layout.simple_spinner_dropdown_item);
+        notify.setAdapter(arrayAdapter);
+        notify.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(MainActivity.this, arrayAdapter.getItem(position), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private void arrayAdapterTwo() {
+        ListView functions = findViewById(R.id.listView);
+        List<String> functionList = Arrays.asList("餘額查詢", "交易明細", "最新消息", "投資理財", "離開");
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, functionList);
+        functions.setAdapter(arrayAdapter);
+    }
+
+    private void arrayAdapterOne() {
+        ListView functions = findViewById(R.id.listView);
+        ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, R.array.functionList, android.R.layout.simple_list_item_1);
+        functions.setAdapter(arrayAdapter);
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

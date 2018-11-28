@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="functions">
+    <string-array name="functionList">
         <item>餘額查詢</item>
         <item>交易明細</item>
         <item>最新消息</item>
         <item>投資理財</item>
         <item>離開</item>
     </string-array>
-    <string-array name="notify">
-        <item>靜音</item>
+    <string-array name="notifyList">
         <item>震動</item>
+        <item>靜音</item>
         <item>有聲</item>
     </string-array>
 </resources>

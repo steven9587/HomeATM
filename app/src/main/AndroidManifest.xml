@@ -19,7 +19,8 @@
         <activity android:name=".Login" />
         <activity android:name=".NicknameActivity" />
         <activity android:name=".AgeActivity" />
-        <activity android:name=".GenderActivity"></activity>
+        <activity android:name=".GenderActivity" />
+        <activity android:name=".TestActivity"></activity>
     </application>
 
 </manifest>
