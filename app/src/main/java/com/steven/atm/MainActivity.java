@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
@@ -36,49 +37,81 @@ public class MainActivity extends BaseActivity {
             Intent login = new Intent(this, Login.class);
             startActivityForResult(login, RC_LOGIN);
         }
-        //ArrayAdapter外部Arraylist
-        //arrayAdapterOut();
-        //ArrayAdapter內部Arraylist
-        //arrayAdapterIn();
-        //Spinner外部Arraylist
+        //LISTVIEW
+        //listViewOut();
+        //listViewIn();
+        //SPINNER
         //spinnerOut();
-        //Spinner內部Arraylist
         //spinnerIn();
-        //GridView
-        GridView gridView = findViewById(R.id.grid);
-        ArrayAdapter<CharSequence> function =
-                ArrayAdapter.createFromResource(this, R.array.functionList, android.R.layout.simple_list_item_1);
-        gridView.setAdapter(function);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        //GRIDVIEW
+        //gridViewOut();
+        //gridViewIn();
+    }
+
+    private void gridViewIn() {
+        GridView functionGridViewIn = findViewById(R.id.grid);
+        List<String> function = Arrays.asList("餘額查詢", "交易明細", "最新消息", "投資理財", "離開");
+        ArrayAdapter<String> gridViewIn = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, function);
+        functionGridViewIn.setAdapter(gridViewIn);
+        functionGridViewIn.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    switch (position){
-                        case 0:
-                            break;
-                        case 1:
-                            break;
-                        case 2:
-                            break;
-                        case 3:
-                            break;
-                        case 4:
-                            finish();
-                            break;
-                    }
+                switch (position) {
+                    case 0:
+                        Intent test = new Intent(MainActivity.this, TestActivity.class);
+                        startActivity(test);
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        finish();
+                        break;
+                }
             }
         });
     }
-    
+
+    private void gridViewOut() {
+        GridView functionGridViewOut = findViewById(R.id.grid);
+        ArrayAdapter<CharSequence> gridOut =
+                ArrayAdapter.createFromResource(this, R.array.functionList, android.R.layout.simple_list_item_1);
+        functionGridViewOut.setAdapter(gridOut);
+        functionGridViewOut.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        Intent test = new Intent(MainActivity.this, TestActivity.class);
+                        startActivity(test);
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        finish();
+                        break;
+                }
+            }
+        });
+    }
+
     private void spinnerIn() {
-        Spinner notify = findViewById(R.id.spinner);
-        List<String> notifyList = Arrays.asList("靜音", "震動", "有聲");
-        final ArrayAdapter<String> arrayAdapter =
-                new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, notifyList);
-        notify.setAdapter(arrayAdapter);
-        notify.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        Spinner notifySpinnerIn = findViewById(R.id.spinner);
+        List<String> notify = Arrays.asList("震動", "靜音", "有聲");
+        final ArrayAdapter spinnerIn =
+                new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, notify);
+        notifySpinnerIn.setAdapter(spinnerIn);
+        notifySpinnerIn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this, arrayAdapter.getItem(position), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, spinnerIn.getItem(position).toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -89,14 +122,14 @@ public class MainActivity extends BaseActivity {
     }
 
     private void spinnerOut() {
-        Spinner notify = findViewById(R.id.spinner);
-        final ArrayAdapter<CharSequence> arrayAdapter =
+        Spinner notifySpinnerOut = findViewById(R.id.spinner);
+        final ArrayAdapter<CharSequence> notifyOut =
                 ArrayAdapter.createFromResource(this, R.array.notifyList, android.R.layout.simple_spinner_dropdown_item);
-        notify.setAdapter(arrayAdapter);
-        notify.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        notifySpinnerOut.setAdapter(notifyOut);
+        notifySpinnerOut.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this, arrayAdapter.getItem(position), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, notifyOut.getItem(position), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -106,17 +139,58 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    private void arrayAdapterIn() {
-        ListView functions = findViewById(R.id.listView);
-        List<String> functionList = Arrays.asList("餘額查詢", "交易明細", "最新消息", "投資理財", "離開");
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, functionList);
-        functions.setAdapter(arrayAdapter);
+    private void listViewIn() {
+        ListView functionListViewIn = findViewById(R.id.listView);
+        List<String> function = Arrays.asList("餘額查詢", "交易明細", "最新消息", "投資理財", "離開");
+        ArrayAdapter listViewIn = new ArrayAdapter(this, android.R.layout.simple_list_item_1, function);
+        functionListViewIn.setAdapter(listViewIn);
+        functionListViewIn.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        Intent test = new Intent(MainActivity.this, TestActivity.class);
+                        startActivity(test);
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        finish();
+                        break;
+                }
+            }
+        });
     }
 
-    private void arrayAdapterOut() {
-        ListView functions = findViewById(R.id.listView);
-        ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, R.array.functionList, android.R.layout.simple_list_item_1);
-        functions.setAdapter(arrayAdapter);
+    private void listViewOut() {
+        ListView functionListViewOut = findViewById(R.id.listView);
+        ArrayAdapter<CharSequence> functionOut =
+                ArrayAdapter.createFromResource(this, R.array.functionList, android.R.layout.simple_list_item_1);
+        functionListViewOut.setAdapter(functionOut);
+        functionListViewOut.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        Intent test = new Intent(MainActivity.this, TestActivity.class);
+                        startActivity(test);
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        finish();
+                        break;
+                }
+            }
+        });
     }
 
 
