@@ -1,39 +1,32 @@
 package com.steven.atm;
 
 import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.accessibility.AccessibilityManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
 
 public class MainActivity extends BaseActivity {
     private static final int RC_LOGIN = 100;
-    boolean login = true;
-    private TextView showNickname;
-    private TextView showAge;
-    private TextView showGender;
+    boolean logon = false;
     private Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (!login) {
+        if (!logon) {
             Intent login = new Intent(this, Login.class);
             startActivityForResult(login, RC_LOGIN);
         }
@@ -42,10 +35,10 @@ public class MainActivity extends BaseActivity {
         //listViewIn();
         //SPINNER
         //spinnerOut();
-        //spinnerIn();
+        spinnerIn();
         //GRIDVIEW
         //gridViewOut();
-        //gridViewIn();
+        gridViewIn();
     }
 
     private void gridViewIn() {
@@ -193,32 +186,25 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_LOGIN) {
-            if (resultCode != RESULT_OK) {
-                finish();
-            } else {
+            if (resultCode == RESULT_OK) {
+//                String saveNickname = getSharedPreferences("user", MODE_PRIVATE)
+//                        .getString("USERNICKNAME", null);
+//                int saveAge = getSharedPreferences("user", MODE_PRIVATE)
+//                        .getInt("USERAGE", 0);
+//                int saveGender = getSharedPreferences("user", MODE_PRIVATE)
+//                        .getInt("USERGENDER", 0);
                 if (!user.isValid()) {
                     Intent nickname = new Intent(this, NicknameActivity.class);
                     startActivity(nickname);
-                } else {
-                    //showPersonalData
-                    //showPersonalData();
                 }
+            } else {
+                finish();
             }
         }
-    }
-
-    private void showPersonalData() {
-        showNickname = findViewById(R.id.finalNickname);
-        showAge = findViewById(R.id.finalAge);
-        showGender = findViewById(R.id.finalGender);
-        showNickname.setText(user.getNickname());
-        showAge.setText(String.valueOf(user.getNickname()));
-        showGender.setText(String.valueOf(user.getNickname()));
     }
 }
 

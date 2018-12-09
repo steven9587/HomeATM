@@ -3,15 +3,14 @@ package com.steven.atm;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.TextView;
 
 public class Login extends BaseActivity {
 
-    private EditText edId;
-    private EditText edPassword;
+    private TextView edId;
+    private TextView edPassword;
     private String id;
     private String password;
-    private String saveId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,9 +18,6 @@ public class Login extends BaseActivity {
         setContentView(R.layout.activity_login);
         edId = findViewById(R.id.ed_id);
         edPassword = findViewById(R.id.ed_password);
-//        saveId = getSharedPreferences("user",MODE_PRIVATE)
-//                .getString("ID",null);
-//        edId.setText(saveId);
         edId.setText(user.getId());
     }
 
@@ -29,12 +25,12 @@ public class Login extends BaseActivity {
         id = edId.getText().toString();
         password = edPassword.getText().toString();
         if ("steven".equals(id) && "1234".equals(password)) {
-            setResult(RESULT_OK);
 //            getSharedPreferences("user", MODE_PRIVATE)
 //                    .edit()
-//                    .putString("ID", id)
+//                    .putString("USERID", id)
 //                    .apply();
             user.setId(id);
+            setResult(RESULT_OK);
             finish();
         } else {
             setResult(RESULT_CANCELED);
